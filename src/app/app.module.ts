@@ -8,10 +8,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routes';
 import {HomeComponent} from './components/home/home.component';
+import {SidebarComponent} from './components/sidebar/sidebar.component';
+import {Instructions} from './services/instructions.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SidebarComponent,
     HomeComponent
   ],
   entryComponents: [
@@ -25,7 +28,7 @@ import {HomeComponent} from './components/home/home.component';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [Instructions],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

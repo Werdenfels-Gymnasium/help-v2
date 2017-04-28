@@ -6,10 +6,12 @@ $accent: mat-palette($mat-grey);
 
 $theme: mat-dark-theme($primary, $accent);
 
+@include mat-core();
 @include angular-material-theme($theme);
 
 body, html {
   margin: 0;
   height: 100%;
   font-family: Roboto, Arial, sans-serif;
+  overflow: hidden;
 }
