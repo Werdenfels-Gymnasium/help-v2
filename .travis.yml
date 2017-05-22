@@ -16,6 +16,7 @@ script:
 
 after_success:
   - npm run publish-content
+  - npm run deploy
 
 cache:
   directories:
