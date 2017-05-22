@@ -1,0 +1,22 @@
+language: node_js
+sudo: false
+
+node_js:
+  - '--lts'
+
+branches:
+  only:
+  - master
+
+install:
+  - npm install
+
+script:
+  - npm run build
+
+after_success:
+  - npm run publish-content
+
+cache:
+  directories:
+    - node_modules
