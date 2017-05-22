@@ -15,8 +15,6 @@ if (!FIREBASE_TOKEN) {
   return;
 }
 
-const guides = glob('**/*.md', {cwd: CONTENT_DIR});
-
 const firebaseApp = firebase.initializeApp({
   credential: firebase.credential.cert({
     project_id: "help-v2-e856d",
@@ -28,15 +26,13 @@ const firebaseApp = firebase.initializeApp({
 
 const database = firebase.database();
 const guidesRef = database.ref('guides');
-
-// Clear old guides
-guidesRef.remove();
+const guides = glob('**/*.md', {cwd: CONTENT_DIR});
 
 // Publish guides on Firebase
 removeGuides()
   .then(() => publishGuides())
   .then(() => console.log('Uploaded all guides to firebase.'))
-  .then(() => firebaseApp.delete(), (err) => {firebaseApp.delete(); console.error(err)});
+  .then(() => firebaseApp.delete(), (err) => {console.error(err); return firebaseApp.delete();});
 
 /** Removes all guides from Firebase */
 function removeGuides() {
