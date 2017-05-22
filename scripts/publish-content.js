@@ -36,7 +36,7 @@ guidesRef.remove();
 removeGuides()
   .then(() => publishGuides())
   .then(() => console.log('Uploaded all guides to firebase.'))
-  .then(() => firebaseApp.delete(), () => firebaseApp.delete());
+  .then(() => firebaseApp.delete(), (err) => {firebaseApp.delete(); console.error(err)});
 
 /** Removes all guides from Firebase */
 function removeGuides() {
@@ -49,7 +49,7 @@ function publishGuides() {
     const canonicalName = basename(fileName).replace(/\.md$/, '').toLocaleLowerCase();
     const fileContent = fs.readFileSync(join(CONTENT_DIR, fileName), 'utf-8');
 
-    const file = readVariable('title', fileContent);
+    const title = readVariable('title', fileContent);
     const group = readVariable('group', fileContent);
     const markedContent = marked(filterVariables(fileContent));
 
@@ -68,9 +68,9 @@ function readVariable(variable, input) {
   return matches && matches[1];
 }
 
-/** Deletes a variable from a file. */
-function filterVariables(variable, input) {
-  return input.replace(new RegExp(`^@${variable} (.+)$`, 'igm', 'g'), '');
+/** Deletes all variables from a Markdown file. */
+function filterVariables(input) {
+  return input.replace(new RegExp(`^@(\\w)+ (.+)$`, 'igm', 'g'), '');
 }
 
 /** Decodes a token from Travis CI */
