@@ -49,6 +49,11 @@ function publishGuides() {
     const group = readVariable('group', fileContent);
     const markedContent = marked(filterVariables(fileContent));
 
+    if (!title) {
+      console.error(`Error: Guide "${fileName}" does not have any @title set!`);
+      process.exit(1);
+    }
+
     // Store the guide with a specific canonical name in the firebase database.
     return guidesRef.child(canonicalName).set({
       title: title,
