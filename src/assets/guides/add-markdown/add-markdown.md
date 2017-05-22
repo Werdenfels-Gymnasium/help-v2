@@ -1,3 +1,6 @@
+@title Guide Schreiben
+@group write-guide
+
 1. Sobald du die Hilfe geklont hast (Siehe [hier](/#!/guide/github-clone) wie klonen geht) wechsle in das Verzeichnis
 
 2. Setzte deinen Proxy mit `setup_proxy` und gib dein Passwort ein

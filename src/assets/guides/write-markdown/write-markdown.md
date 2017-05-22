@@ -1,3 +1,6 @@
+@title Markdown schreibenx
+@group write-guide
+
 1. Schreibe einfach einen Text um einen Text anzuzeigen
 
 2. Um Text als Befehl oder Dateieindung anzuzeigen verwende diesen Syntax `\`text.md\``
