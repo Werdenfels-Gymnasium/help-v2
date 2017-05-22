@@ -13,6 +13,7 @@ import {HomeComponent} from './components/home/home.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {Backend} from './services/backend.service';
 import {environment} from '../environments/environment';
+import {GuideComponent} from './components/guide/guide.component';
 
 @NgModule({
   exports: [
@@ -29,10 +30,12 @@ export class AppMaterialModule {}
   declarations: [
     AppComponent,
     SidebarComponent,
-    HomeComponent
+    HomeComponent,
+    GuideComponent
   ],
   entryComponents: [
-    HomeComponent
+    HomeComponent,
+    GuideComponent
   ],
   imports: [
     BrowserModule,
