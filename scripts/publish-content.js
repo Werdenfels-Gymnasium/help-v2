@@ -23,10 +23,19 @@ const firebaseApp = firebase.initializeApp({
 const database = firebase.database();
 const guidesRef = database.ref('guides');
 
+// Clear old guides
+guidesRef.remove();
+
 // Publish guides on Firebase
-publishGuides()
+removeGuides()
+  .then(() => publishGuides())
   .then(() => console.log('Uploaded all guides to firebase.'))
   .then(() => firebaseApp.delete(), () => firebaseApp.delete());
+
+/** Removes all guides from Firebase */
+function removeGuides() {
+  return guidesRef.remove();
+}
 
 /** Publishes all guides on Firebase */
 function publishGuides() {
