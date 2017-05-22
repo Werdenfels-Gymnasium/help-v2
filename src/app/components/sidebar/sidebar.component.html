@@ -1,19 +1,7 @@
 <md-nav-list>
-  <a md-list-item>Github</a>
-    <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
-  <a md-list-item>Github</a>
+
+  <a md-list-item *ngFor="let guide of guides | async">
+    {{ guide.title }}
+  </a>
 
 </md-nav-list>

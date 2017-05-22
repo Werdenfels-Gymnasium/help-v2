@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {Instructions} from '../../services/instructions.service';
+import {Backend, GuideData} from '../../services/backend.service';
+import {FirebaseListObservable} from 'angularfire2/database';
 
 @Component({
   selector: 'sidebar-content',
@@ -8,6 +9,10 @@ import {Instructions} from '../../services/instructions.service';
 })
 export class SidebarComponent {
 
-  constructor(instructions: Instructions) {}
+  guides: FirebaseListObservable<GuideData[]>;
+
+  constructor(backend: Backend) {
+    this.guides = backend.guides;
+  }
 
 }

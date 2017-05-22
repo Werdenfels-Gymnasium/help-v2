@@ -2,14 +2,28 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {MaterialModule} from '@angular/material';
+import {MdCardModule, MdListModule, MdSidenavModule, MdToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routes';
 import {HomeComponent} from './components/home/home.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
-import {Instructions} from './services/instructions.service';
+import {Backend} from './services/backend.service';
+import {environment} from '../environments/environment';
+
+@NgModule({
+  exports: [
+    BrowserAnimationsModule,
+    MdToolbarModule,
+    MdSidenavModule,
+    MdCardModule,
+    MdListModule
+  ]
+})
+export class AppMaterialModule {}
 
 @NgModule({
   declarations: [
@@ -21,14 +35,15 @@ import {Instructions} from './services/instructions.service';
     HomeComponent
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpModule,
-    BrowserAnimationsModule,
-    MaterialModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AppRoutingModule,
+    AppMaterialModule,
   ],
-  providers: [Instructions],
+  providers: [Backend],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
