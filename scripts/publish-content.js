@@ -70,7 +70,7 @@ function readVariable(variable, input) {
 
 /** Deletes all variables from a Markdown file. */
 function filterVariables(input) {
-  return input.replace(new RegExp(`^@(\\w)+ (.+)$`, 'igm', 'g'), '');
+  return input.replace(new RegExp(`^@(\\w)+ (.+)$`, 'igm'), '');
 }
 
 /** Decodes a token from Travis CI */
