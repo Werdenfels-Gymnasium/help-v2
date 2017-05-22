@@ -7,4 +7,4 @@ cd $(dirname ${0})/..
 $(npm bin)/ng build --aot -prod
 
 # Upload app to firebase
-$(npm bin)/firebase deploy
+$(npm bin)/firebase deploy --token ${HELP_V2_FIREBASE_ACCESS_TOKEN}
