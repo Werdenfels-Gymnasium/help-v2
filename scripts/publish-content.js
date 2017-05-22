@@ -49,9 +49,9 @@ function publishGuides() {
     const canonicalName = basename(fileName).replace(/\.md$/, '').toLocaleLowerCase();
     const fileContent = fs.readFileSync(join(CONTENT_DIR, fileName), 'utf-8');
 
-    const title = readVariable('title', fileContent);
+    const file = readVariable('title', fileContent);
     const group = readVariable('group', fileContent);
-    const markedContent = marked(fileContent);
+    const markedContent = marked(filterVariables(fileContent));
 
     // Store the guide with a specific canonical name in the firebase database.
     return guidesRef.child(canonicalName).set({
@@ -64,8 +64,13 @@ function publishGuides() {
 
 /** Read a variable from a file using the annotation symbol. */
 function readVariable(variable, input) {
-  const matches = new RegExp(`@${variable}\\s(.*)`, 'g').exec(input);
+  const matches = new RegExp(`^@${variable} (.+)$`, 'igm').exec(input);
   return matches && matches[1];
+}
+
+/** Deletes a variable from a file. */
+function filterVariables(variable, input) {
+  return input.replace(new RegExp(`^@${variable} (.+)$`, 'igm', 'g'), '');
 }
 
 /** Decodes a token from Travis CI */

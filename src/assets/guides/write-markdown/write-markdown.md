@@ -1,4 +1,4 @@
-@title Markdown schreibenx
+@title Markdown schreiben
 @group write-guide
 
 1. Schreibe einfach einen Text um einen Text anzuzeigen
