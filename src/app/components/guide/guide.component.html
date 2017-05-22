@@ -1,1 +1,5 @@
-<div [innerHTML]="(guideData | async)?.content"></div>
+<md-card class="guide-card">
+  <md-card-title>{{ (guideData | async)?.title }}</md-card-title>
+  <md-card-content class="markdown-body" [innerHTML]="(guideData | async)?.content">
+  </md-card-content>
+</md-card>

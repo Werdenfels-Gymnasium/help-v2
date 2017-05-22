@@ -1,0 +1,6 @@
+@import '../../../theme';
+@include mat-card-theme($light-theme);
+
+:host /deep/ {
+  @import '~github-markdown-css';
+}

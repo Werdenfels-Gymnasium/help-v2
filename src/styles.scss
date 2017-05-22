@@ -1,13 +1,7 @@
-@import '~@angular/material/_theming.scss';
-
-/** Theming for Material */
-$primary: mat-palette($mat-blue);
-$accent: mat-palette($mat-grey);
-
-$theme: mat-dark-theme($primary, $accent);
+@import './theme';
 
 @include mat-core();
-@include angular-material-theme($theme);
+@include angular-material-theme($dark-theme);
 
 body, html {
   margin: 0;
