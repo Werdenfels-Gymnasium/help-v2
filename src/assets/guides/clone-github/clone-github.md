@@ -1,4 +1,7 @@
-﻿1. Navigiere in das Verzeichnis in dem du das Github-Projekt abspeichern willst
+﻿@title Github Klonen
+@group github
+
+1. Navigiere in das Verzeichnis in dem du das Github-Projekt abspeichern willst
 
 2. Kopiere nun die URL der Projektseite neben dem HTTPS-Text 
 
