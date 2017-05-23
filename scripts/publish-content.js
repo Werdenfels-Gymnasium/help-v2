@@ -65,13 +65,13 @@ function publishGuides() {
 
 /** Read a variable from a file using the annotation symbol. */
 function readVariable(variable, input) {
-  const matches = new RegExp(`^@${variable} (.+)$`, 'igm').exec(input);
+  const matches = new RegExp(`^\s?@${variable}\s+(.+)$`, 'igm').exec(input);
   return matches && matches[1];
 }
 
 /** Deletes all variables from a Markdown file. */
 function filterVariables(input) {
-  return input.replace(new RegExp(`^@(\\w)+ (.+)$`, 'igm'), '');
+  return input.replace(new RegExp(`^\s?+@(\\w)+\s+(.+)$`, 'igm'), '');
 }
 
 /** Decodes a token from Travis CI */
