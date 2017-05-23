@@ -1,3 +1,5 @@
+@import '../theme';
+
 md-sidenav-container {
   height: 100%;
 }
@@ -7,6 +9,14 @@ md-sidenav {
   padding: 12px;
 }
 
-.content {
+md-toolbar a {
+	text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/deep/ .content {
   padding: 12px;
+
+  @include mat-card-theme($light-theme);
 }
