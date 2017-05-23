@@ -13,8 +13,6 @@ install:
 
 script:
   - npm run build
-
-after_script:
   - npm run publish-content
 
 after_success:
