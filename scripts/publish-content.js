@@ -85,7 +85,7 @@ function publishGuides() {
 function publishImages() {
   return Promise.all(images.map(fileName => {
     const canonicalName = basename(fileName).replace(extname(fileName), '').toLowerCase();
-    return guidesBucket.upload(fileName);
+    return guidesBucket.upload(join(CONTENT_DIR, fileName));
   }));
 }
 
