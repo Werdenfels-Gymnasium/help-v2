@@ -32,7 +32,7 @@ const firebaseApp = firebase.initializeApp({
 });
 
 const storage = cloudStorage({
-  projectId: FIREBASE_PROJECT_ID
+  projectId: FIREBASE_PROJECT_ID,
   credentials: {
     private_key: FIREBASE_TOKEN,
     client_email: FIREBASE_CLIENT_EMAIL
