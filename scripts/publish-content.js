@@ -48,6 +48,7 @@ const images = glob('**/*.+(png|jpg|gif)', {cwd: CONTENT_DIR});
 
 // Publish guides on Firebase
 removeGuides()
+  .then(() => deleteOldImages())
   .then(() => publishImages())
   .then(() => publishGuides())
   .then(() => console.log('Uploaded all guides to firebase.'))
@@ -85,8 +86,14 @@ function publishGuides() {
 function publishImages() {
   return Promise.all(images.map(fileName => {
     const canonicalName = basename(fileName).replace(extname(fileName), '').toLowerCase();
-    return guidesBucket.upload(join(CONTENT_DIR, fileName));
+    return guidesBucket.upload(join(CONTENT_DIR, fileName), { destination: fileName });
   }));
+}
+
+function deleteOldImages() {
+  // TODO: Needs to be implemented
+  return Promise.resolve();
+
 }
 
 /** Read a variable from a file using the annotation symbol. */
