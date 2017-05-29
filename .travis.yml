@@ -13,9 +13,9 @@ install:
 
 script:
   - npm run build
+  - npm run publish-content
 
 after_success:
-  - npm run publish-content
   - npm run deploy
 
 cache:
