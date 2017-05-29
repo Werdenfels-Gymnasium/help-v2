@@ -1,10 +1,11 @@
 'use strict';
 
-const {join, basename} = require('path');
+const {join, basename, extname} = require('path');
 const marked = require('marked');
 const glob = require('glob').sync;
 const fs = require('fs');
 const firebase = require('firebase-admin');
+const cloudStorage = require('@google-cloud/storage');
 
 const PROJECT_DIR = join(__dirname, '..');
 const CONTENT_DIR = join(PROJECT_DIR, 'src/assets/guides');
@@ -15,21 +16,39 @@ if (!FIREBASE_TOKEN) {
   return;
 }
 
+// Setup firebase project constants
+const FIREBASE_DATABASE_URL = 'https://help-v2-e856d.firebaseio.com';
+const FIREBASE_PROJECT_ID = 'help-v2-e856d';
+const FIREBASE_CLIENT_EMAIL = 'firebase-adminsdk-sgyjb@help-v2-e856d.iam.gserviceaccount.com';
+const FIREBASE_STORAGE_BUCKET = 'help-v2-e856d.appspot.com';
+
 const firebaseApp = firebase.initializeApp({
   credential: firebase.credential.cert({
-    project_id: "help-v2-e856d",
+    project_id: FIREBASE_PROJECT_ID,
     private_key: FIREBASE_TOKEN,
-    client_email: "firebase-adminsdk-sgyjb@help-v2-e856d.iam.gserviceaccount.com"
+    client_email: FIREBASE_CLIENT_EMAIL
   }),
-  databaseURL: "https://help-v2-e856d.firebaseio.com"
+  databaseURL: FIREBASE_DATABASE_URL
 });
 
-const database = firebase.database();
-const guidesRef = database.ref('guides');
+const storage = cloudStorage({
+  projectId: FIREBASE_PROJECT_ID
+  credentials: {
+    private_key: FIREBASE_TOKEN,
+    client_email: FIREBASE_CLIENT_EMAIL
+  }
+});
+
+const guidesRef = firebase.database().ref('guides');
+const guidesBucket = storage.bucket(FIREBASE_STORAGE_BUCKET);
+
 const guides = glob('**/*.md', {cwd: CONTENT_DIR});
+const images = glob('**/*.+(png|jpg|gif)', {cwd: CONTENT_DIR});
+
 
 // Publish guides on Firebase
 removeGuides()
+  .then(() => publishImages())
   .then(() => publishGuides())
   .then(() => console.log('Uploaded all guides to firebase.'))
   .then(() => firebaseApp.delete(), (err) => {console.error(err); return firebaseApp.delete();});
@@ -42,7 +61,7 @@ function removeGuides() {
 /** Publishes all guides on Firebase */
 function publishGuides() {
   return Promise.all(guides.map(fileName => {
-    const canonicalName = basename(fileName).replace(/\.md$/, '').toLocaleLowerCase();
+    const canonicalName = basename(fileName).replace(extname(fileName), '').toLowerCase();
     const fileContent = fs.readFileSync(join(CONTENT_DIR, fileName), 'utf-8');
 
     const title = readVariable('title', fileContent);
@@ -60,6 +79,13 @@ function publishGuides() {
       group: group,
       content: markedContent
     });
+  }));
+}
+
+function publishImages() {
+  return Promise.all(images.map(fileName => {
+    const canonicalName = basename(fileName).replace(extname(fileName), '').toLowerCase();
+    return guidesBucket.upload(fileName);
   }));
 }
 
