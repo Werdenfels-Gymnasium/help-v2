@@ -11,6 +11,8 @@ const PROJECT_DIR = join(__dirname, '..');
 const CONTENT_DIR = join(PROJECT_DIR, 'src/assets/guides');
 const FIREBASE_TOKEN = decodeToken(process.env['HELP_V2_FIREBASE_TOKEN']);
 
+const isVerbose = process.argv.indexOf('--verbose');
+
 if (!FIREBASE_TOKEN) {
   console.error('No firebase private key specified. Set the "HELP_V2_FIREBASE_TOKEN" variable!');
   return;
@@ -30,6 +32,9 @@ const firebaseApp = firebase.initializeApp({
   }),
   databaseURL: FIREBASE_DATABASE_URL
 });
+
+// Enable logging in verbose mode
+firebase.database.enableLogging(isVerbose);
 
 const storage = cloudStorage({
   projectId: FIREBASE_PROJECT_ID,
@@ -91,9 +96,10 @@ function publishImages() {
 }
 
 function deleteOldImages() {
-  // TODO: Needs to be implemented
-  return Promise.resolve();
-
+  return guidesBucket.getFiles().then(files => {
+    const outdatedImages = files.filter(file => images.indexOf(file.name) === -1);
+    return Promise.all(outdatedImages.map(file => file.delete()));
+  });
 }
 
 /** Read a variable from a file using the annotation symbol. */
