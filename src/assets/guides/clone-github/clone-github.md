@@ -5,7 +5,7 @@
 
 2. Kopiere nun die URL der Projektseite neben dem HTTPS-Text 
 
-    ![Screenshot 1](./clone-github-url.png)
+    ![Screenshot 1](clone-github-url.png)
 
 3. Öffne jetzt das Terminal in dem gewünschten Verzeichnis 
 

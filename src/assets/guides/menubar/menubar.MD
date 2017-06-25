@@ -5,4 +5,4 @@
 
 2. Klicke nun auf `Menüleiste`
 
-  ![Screenshot 1](content/guides/THUNDERBIRD/MENUBAR/screen1.png)
+  ![Screenshot 1](screen1.png)

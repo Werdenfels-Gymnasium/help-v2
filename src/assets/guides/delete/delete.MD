@@ -7,4 +7,4 @@
 
 3. Klicke auf `Löschen`
 
-   ![Screenshot 1](content/guides/LOESCHEN/screen1.png)
+   ![Screenshot 1](screen1.png)

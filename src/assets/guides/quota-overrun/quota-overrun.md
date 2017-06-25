@@ -1,31 +1,31 @@
-@title Quota-Überschreitung
+﻿@title Quota-Überschreitung
 @group quota
 
 So findet ihr heraus mit welcher Datei(n) das "Quota" überschritten ist
 
 1. Falls folgende Warnmeldung erscheint
 
-   ![Screenshot 1](./quota_ueberschritten_warnmeldung.png)
+   ![Screenshot 1](quota_ueberschritten_warnmeldung.png)
 
 2. Klicke diesen Link um zur Schulkonsolen-Webseite zu gelangen: https://10.16.1.1:242/schulkonsole/start 
 
 3. Melde dich an
 
-   ![Screenshot 2](./log_in.png)
+   ![Screenshot 2](log_in.png)
 
 4. Überprüfe die Quota-Überschreitung auf der Schulkonsolen-Webseite
 
-   ![Screenshot 3](./quota_schulkonsole_ueberschreitung.png)
+   ![Screenshot 3](quota_schulkonsole_ueberschreitung.png)
 
 5. Öffne das Terminal mit der Tastenkombination `STRG + ALT + T`
 
 6. Gib nun den Befehl `ncdu` ein
 
-   ![Screenshot 4](./eingabe_ncdu.png)
+   ![Screenshot 4](eingabe_ncdu.png)
 
 7. Warte bis folgendes zu sehen ist:
 
-   ![Screenshot 5](./quota_ncdu_list.png)
+   ![Screenshot 5](quota_ncdu_list.png)
 
    Die Dateigröße ist links am Rand zu sehen
 

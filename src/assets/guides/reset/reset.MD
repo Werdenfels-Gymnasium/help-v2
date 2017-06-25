@@ -7,4 +7,4 @@
 
 3. Lösche jetzt das Verzeichnis `.thunderbird`
 
-  ![Screenshot 1](content/guides/THUNDERBIRD/RESET/screen1.png)
+  ![Screenshot 1](screen1.png)
