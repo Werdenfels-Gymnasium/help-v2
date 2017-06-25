@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {MdCardModule, MdListModule, MdSidenavModule, MdToolbarModule} from '@angular/material';
+import {MdCardModule, MdListModule, MdSidenavModule, MdToolbarModule, MdButtonModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
@@ -14,6 +14,7 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {Backend} from './services/backend.service';
 import {environment} from '../environments/environment';
 import {GuideComponent} from './components/guide/guide.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
 
 @NgModule({
   exports: [
@@ -21,7 +22,8 @@ import {GuideComponent} from './components/guide/guide.component';
     MdToolbarModule,
     MdSidenavModule,
     MdCardModule,
-    MdListModule
+    MdListModule,
+    MdButtonModule,
   ]
 })
 export class AppMaterialModule {}
@@ -31,7 +33,8 @@ export class AppMaterialModule {}
     AppComponent,
     SidebarComponent,
     HomeComponent,
-    GuideComponent
+    GuideComponent,
+    NotFoundComponent,
   ],
   entryComponents: [
     HomeComponent,

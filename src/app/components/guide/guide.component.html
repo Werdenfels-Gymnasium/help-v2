@@ -1,5 +1,14 @@
-<md-card class="guide-card">
+<!-- Card that shows if the guide data was loaded properly -->
+<md-card class="guide-card" *ngIf="(guideData | async)?.$exists()">
   <md-card-title>{{ (guideData | async)?.title }}</md-card-title>
   <md-card-content class="markdown-body" [innerHTML]="(guideData | async)?.content">
+  </md-card-content>
+</md-card>
+
+<!-- Card that shows if the guide could not be found in the database. -->
+<md-card *ngIf="!(guideData | async)?.$exists()">
+  <md-card-title>Anleitung konnte nicht gefunden werden.</md-card-title>
+  <md-card-content>
+    <button md-raised-button color="primary" routerLink="/">Zurück zur Startseite</button>
   </md-card-content>
 </md-card>
