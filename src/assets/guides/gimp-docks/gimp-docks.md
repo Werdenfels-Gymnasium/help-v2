@@ -9,7 +9,7 @@ So öffnet ihr in Gimp geschlossene Docks und verwendet Gimp im Einzelfenster-Mo
 
 2. So sieht Gimp <b>ohne<b> Docks aus:
 
- ![Screenshot 2](winodw-no-docks.png)
+ ![Screenshot 2](window-no-docks.png)
 
  <b>Hinweis<b>: Überprüfen ob du die Docks geschlossen bzw. versteckt hast.
 	        Mit der Tabulator-Taste können die Docks versteckt bzw. wieder sichtbar gemacht werden.
