@@ -12,6 +12,8 @@ const PROJECT_DIR = join(__dirname, '..');
 const CONTENT_DIR = join(PROJECT_DIR, 'src/assets/guides');
 const FIREBASE_TOKEN = decodeToken(process.env['HELP_V2_FIREBASE_TOKEN']) || '-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCnYRBxur17F0rS\nEyf6HtkVAAzMjd9x9/FDgUYbaRX2l2WrPrGqPD2qHJI5LQ5n7SrZkf02P8+cHXL2\nNof0eA2J2i8Tbl/R/IuBm3+H7PWS3iwm8OBv8Cvz/z+DUkQ0fjP3A4tBZIPleqbQ\nY28ryqwSuBCpQoXrucA89ekyXLXo+2NpprZ2fuSdPH7EBfFK5fgJYrXyAO47PC8n\noCe/KlF+qtb81O1weWUyB72fnmpBRas7YvPj4T/qJ2c1ql3JClZtL1cjBrqA3vKY\niYpHHs9dxbgkJDaK0y/oB/7aRQ3jUBY7Rh9VjZ6Ks3brHS9weoXQLuHHThKO2xsl\n0Wy675jlAgMBAAECggEAEqWAlHruQvk8T5zstjObkXhY9KzVeLfbe9659bHGTZte\nKy6n0kQ1xm66Z346fZ9xR5247MM9GLI7LWyzxqtdLr9MwUhpilYtIHo3QehHD16K\n4qexCSdjbiJAbBvNF1/74AfYCqfs/bKlRM/fAazpcIhq6sBLdRBTdzcaDI9BgLva\nX4JU2NRW80MwFLh542NIct2RlbMKwVwL+17sVzrqwnTzz1wfCs84kvXKNdKyb6pp\n1erFwZd1mpxSCMTtg0+wfGN3I97Yncz4V0Ps7uOryhjwI2Y7NbRBCCpCAt8I21+a\n4GG7WKaJHOUO/OJXg6jufFoM0BU2US1+QF21L9O1nQKBgQDlqCoiNTDyQTuqeA54\nkGiR0EbuZShHplb8qQDiaTZ1tG3vDO4WX+E+esDNtpQlMiMA/zQQSOnjT4TxLiPO\n3LUtBvDk/uakjZ4soHifTu7ppBdw2XKNU5oShy95eYAJFxNWDy5NuxJHsu6byBRR\nGhfoY7goG+DIrzf0AKqVkuBrdwKBgQC6lB/kr4DL+oV2kyBenF03cWKXpM7RIoZE\nkqWXqPB1Ljbvke719VczKD1S36Vz2z8VhLVnpHYBQruLRlxv2S5If4bMfQweD/Ma\nLwlfSEBaftp8S9aPy/tpc6oyGOMu3CPYwJn8FlS1FDZ3avBPWP/V3cVVETdGxjkI\n/sshKDz9gwKBgDiIph6Xo33vSwXS2hUZz3QdpmhnJHxG2WEHJX2W0t401V8kerOt\nVKBxzWaWjG9/oRhMun9Lw6++UoagihYRRNRZwhFNIm/doNNxiWAGKVAAofiYvtdF\nfkcTWj94Bmm2cX8c65Qc+goGZTCaF05DsyD080+EVVhxsb9yLov1hSNPAoGAWq4b\nQh46TukXbKXdGZ6Nf6DP9jvXeLV65GERskAdfhZUBOO8bDYth2OLSngABesNIfw5\n3oGECODSHcK4snOvlvTEIyazePjvgk5SE8kd3d3Bep+xTHorWvkoQujtoZzEn1gc\nfvSrfsawIiILYcUzslHy0oFniDJXDhQnzZms6tkCgYAnJDXCh1tVn+6RgwSiSds/\n75c9TfBxb3z9V9qZZOyryQ9Sb3ROi5U6ZzbMwgE8OIAe1dJDhFcYTeAdU/B2WvxQ\nrmztsoXMg27WLj2AMoOF0UzqxZpj++0QlS3TqY+2+ZlYCu3cH5/VIosgEK+7tiS6\ngaxHCUHBBnNUIcDYM2783A==\n-----END PRIVATE KEY-----\n';
 
+const isVerbose = process.argv.indexOf('--verbose');
+
 if (!FIREBASE_TOKEN) {
   console.error('No firebase private key specified. Set the "HELP_V2_FIREBASE_TOKEN" variable!');
   return;
@@ -31,6 +33,9 @@ const firebaseApp = firebase.initializeApp({
   }),
   databaseURL: FIREBASE_DATABASE_URL
 });
+
+// Enable logging in verbose mode
+firebase.database.enableLogging(isVerbose);
 
 const storage = cloudStorage({
   projectId: FIREBASE_PROJECT_ID,
